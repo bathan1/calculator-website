@@ -1,0 +1,14 @@
+#innerFrame {
+    border: 2px solid red;
+    width:500px;
+    height: 625px;
+    display:flex;
+    align-content:space-between;
+    flex-wrap:wrap;
+}
+
+button {
+    box-sizing: border-box;
+    width: 125px;
+    height: 125px;
+}
