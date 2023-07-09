@@ -4,11 +4,26 @@
     height: 625px;
     display:flex;
     align-content:space-between;
+}
+
+#digitButtons {
+    flex-grow: 2;
+    display:flex;
     flex-wrap:wrap;
+}
+
+#operators {
+    flex-grow: 1;
+    display:flex;
+    flex-direction:column;
 }
 
 button {
     box-sizing: border-box;
     width: 125px;
     height: 125px;
+}
+
+#addition {
+    flex-grow: 2;
 }
