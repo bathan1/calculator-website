@@ -21,7 +21,7 @@ function multiply(num1, num2) {
 
 function divide(num1, num2) {
     if (num2 === 0) {
-        return;
+        return "lol";
     }
     return num1 / num2;
 }
@@ -49,8 +49,7 @@ function processInput(input) {
     let expressionArr = input.split(" ");
     let result = 0;
     if (expressionArr.length % 2 != 1) {
-        console.log("invalid expression");
-        return;
+        return "invalid expression";
     }
     else {
         while (expressionArr.length != 0) {
