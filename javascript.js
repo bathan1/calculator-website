@@ -35,3 +35,27 @@ function operate(operator, num1, num2) {
     }
     return result;
 }
+
+const displayScreen = document.querySelector("#screen");
+const digitsButtons = document.querySelectorAll(".digits");
+digitsButtons.forEach((digitButton) => {
+    digitButton.addEventListener("click", () => {
+        //@ts-ignore
+        displayScreen.textContent += digitButton.textContent;
+    });
+});
+
+const operators = document.querySelectorAll(".operator");
+operators.forEach( (operator) => {
+    operator.addEventListener("click", () => {
+        //@ts-ignore
+        displayScreen.textContent += operator.textContent;
+    });
+});
+
+const clearButton = document.querySelector("#clear");
+//@ts-ignore
+clearButton.addEventListener("click", () => {
+    //@ts-ignore
+    displayScreen.textContent = "";
+});

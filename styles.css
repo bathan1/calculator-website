@@ -1,5 +1,26 @@
-#innerFrame {
-    border: 2px solid red;
+#display {
+    width:500px;
+    height:250px;
+    border-right: 2px solid darkblue;
+    border-left: 2px solid darkblue;
+    border-top: 2px solid darkblue;
+
+    display:flex;
+    flex-direction: column;
+}
+
+#header {
+    background-color:red;
+    flex-grow:1;
+}
+
+#screen {
+    max-height: 125px;
+    flex-grow: 1;
+}
+
+#userButtons {
+    border: 2px solid darkblue;
     width:500px;
     height: 625px;
     display:flex;
