@@ -49,7 +49,7 @@ function operate(operator, num1, num2) {
 function processInput(input) {
     let expressionArr = input.split(" ");
     if (expressionArr.length === 1) {
-        return expressionArr[0];
+        return input;
     }
     let result = 0;
     if (expressionArr.length % 2 != 1) {
@@ -133,6 +133,10 @@ evalButton.addEventListener("click", () => {
     let input = displayScreen.textContent;
     let result = processInput(input);
     //@ts-ignore
+    if (result === input) {
+        displayScreen.textContent = result;
+        return;
+    }
     displayScreen.textContent = result;
     hasDecimal = false;
     resulted = true;
