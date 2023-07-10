@@ -1,3 +1,6 @@
+let opRegEx = /[+\-x÷]/;
+let digitsRegEx = /[0-9]/;
+
 let lastInputIsDigit = true;
 let resulted = false;
 let hasDecimal = false;
@@ -166,4 +169,21 @@ dotButton.addEventListener("click", () => {
         return;
     }
 
-})
+});
+
+const backspace = document.querySelector("#backspace");
+backspace?.addEventListener("click", () => {
+    let text = displayScreen?.textContent;
+    if (text.length >= 1) {
+        let deletedChar = text?.substring(text.length - 1);
+        text = text?.substring(0, text.length - 1);
+        if (opRegEx.test(deletedChar)) {
+            text = text?.substring(0, text.length - 1);
+            lastInputIsDigit = true;
+        }
+        else if (deletedChar === ".") {
+            hasDecimal = false;
+        }
+    }
+    displayScreen.textContent = text;
+});
