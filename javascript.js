@@ -1,3 +1,5 @@
+let lastInputIsDigit = false;
+
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -36,12 +38,21 @@ function operate(operator, num1, num2) {
     return result;
 }
 
+function processInput(input) {
+    
+}
+ 
 const displayScreen = document.querySelector("#screen");
 const digitsButtons = document.querySelectorAll(".digits");
 digitsButtons.forEach((digitButton) => {
     digitButton.addEventListener("click", () => {
-        //@ts-ignore
-        displayScreen.textContent += digitButton.textContent;
+        if (!lastInputIsDigit) {
+            displayScreen.textContent += " " + digitButton.textContent;
+            lastInputIsDigit = true;
+        }
+        else {
+            displayScreen.textContent += digitButton.textContent;
+        }
     });
 });
 
@@ -49,7 +60,10 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach( (operator) => {
     operator.addEventListener("click", () => {
         //@ts-ignore
-        displayScreen.textContent += operator.textContent;
+        if (lastInputIsDigit) {
+            displayScreen.textContent += " " + operator.textContent;
+            lastInputIsDigit = false;
+        }
     });
 });
 
@@ -58,4 +72,14 @@ const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
     //@ts-ignore
     displayScreen.textContent = "";
+});
+
+const evalButton = document.querySelector("#evalButton");
+//@ts-ignore
+evalButton.addEventListener("click", () => {
+    //@ts-ignore
+    let input = displayScreen.textContent;
+    let result = processInput(input);
+    //@ts-ignore
+    displayScreen.textContent = result;
 });
