@@ -6,6 +6,8 @@ function clearCalc() {
     //@ts-ignore
     displayScreen.textContent = "";
     lastInputIsDigit = true;
+    hasDecimal = false;
+    resulted = false;
 }
 
 function add(num1, num2) {
@@ -137,6 +139,7 @@ evalButton.addEventListener("click", () => {
         displayScreen.textContent = result;
         return;
     }
+    result = Math.round(result * 10000) / 10000;
     displayScreen.textContent = result;
     hasDecimal = false;
     resulted = true;
@@ -148,11 +151,13 @@ dotButton.addEventListener("click", () => {
     if (resulted) {
         displayScreen.textContent = ".";
         resulted = false;
+        hasDecimal = true;
         return;
     }
     if (!lastInputIsDigit) {
         displayScreen.textContent += " ."
         lastInputIsDigit = true;
+        hasDecimal = true;
         return;
     }
     if (!hasDecimal) {
