@@ -1,4 +1,4 @@
-let lastInputIsDigit = false;
+let lastInputIsDigit = true;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -39,7 +39,43 @@ function operate(operator, num1, num2) {
 }
 
 function processInput(input) {
-    
+    let expressionArr = input.split(" ");
+    let result = 0;
+    if (expressionArr.length % 2 != 1) {
+        console.log("invalid expression");
+        return;
+    }
+    else {
+        while (expressionArr.length != 0) {
+            let num1 = Number(expressionArr[0]);
+            let num2 = Number(expressionArr[2]);
+            let operator = expressionArr[1];
+
+            switch (operator) {
+                case "+":
+                    result = add(num1, num2);
+                    break;
+                case "-":
+                    result = subtract(num1, num2);
+                    break;
+                case "x":
+                    result = multiply(num1, num2);
+                    break;
+                case "÷":
+                    result = divide(num1, num2);
+                    break;
+            }
+            expressionArr.splice(0, 1);
+            expressionArr.splice(0, 1);
+            if (expressionArr.length === 1) {
+                expressionArr.splice(0, 1);
+            }
+            else {
+                expressionArr.splice(0, 1, result);
+            }
+        }
+        return result;
+    }
 }
  
 const displayScreen = document.querySelector("#screen");
@@ -72,6 +108,7 @@ const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
     //@ts-ignore
     displayScreen.textContent = "";
+    lastInputIsDigit = true;
 });
 
 const evalButton = document.querySelector("#evalButton");
