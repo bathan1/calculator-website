@@ -1,5 +1,6 @@
 let lastInputIsDigit = true;
 let resulted = false;
+let hasDecimal = false;
 
 function clearCalc() {
     //@ts-ignore
@@ -47,6 +48,9 @@ function operate(operator, num1, num2) {
 
 function processInput(input) {
     let expressionArr = input.split(" ");
+    if (expressionArr.length === 1) {
+        return expressionArr[0];
+    }
     let result = 0;
     if (expressionArr.length % 2 != 1) {
         return "invalid expression";
@@ -107,9 +111,10 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach( (operator) => {
     operator.addEventListener("click", () => {
         //@ts-ignore
-        if (lastInputIsDigit) {
+        if (lastInputIsDigit && displayScreen.textContent !== "") {
             displayScreen.textContent += " " + operator.textContent;
             lastInputIsDigit = false;
+            hasDecimal = false;
         }
     });
 });
@@ -129,5 +134,27 @@ evalButton.addEventListener("click", () => {
     let result = processInput(input);
     //@ts-ignore
     displayScreen.textContent = result;
+    hasDecimal = false;
     resulted = true;
 });
+
+const dotButton = document.querySelector("#decimal");
+//@ts-ignore
+dotButton.addEventListener("click", () => {
+    if (resulted) {
+        displayScreen.textContent = ".";
+        resulted = false;
+        return;
+    }
+    if (!lastInputIsDigit) {
+        displayScreen.textContent += " ."
+        lastInputIsDigit = true;
+        return;
+    }
+    if (!hasDecimal) {
+        displayScreen.textContent += ".";
+        hasDecimal = true;
+        return;
+    }
+
+})
