@@ -1,4 +1,11 @@
 let lastInputIsDigit = true;
+let resulted = false;
+
+function clearCalc() {
+    //@ts-ignore
+    displayScreen.textContent = "";
+    lastInputIsDigit = true;
+}
 
 function add(num1, num2) {
     return num1 + num2;
@@ -82,6 +89,11 @@ const displayScreen = document.querySelector("#screen");
 const digitsButtons = document.querySelectorAll(".digits");
 digitsButtons.forEach((digitButton) => {
     digitButton.addEventListener("click", () => {
+        if (resulted) {
+            clearCalc();
+            resulted = false;
+        }
+
         if (!lastInputIsDigit) {
             displayScreen.textContent += " " + digitButton.textContent;
             lastInputIsDigit = true;
@@ -105,18 +117,18 @@ operators.forEach( (operator) => {
 
 const clearButton = document.querySelector("#clear");
 //@ts-ignore
-clearButton.addEventListener("click", () => {
-    //@ts-ignore
-    displayScreen.textContent = "";
-    lastInputIsDigit = true;
-});
+clearButton.addEventListener("click", clearCalc);
 
 const evalButton = document.querySelector("#evalButton");
 //@ts-ignore
 evalButton.addEventListener("click", () => {
+    if (resulted) {
+        return;
+    }
     //@ts-ignore
     let input = displayScreen.textContent;
     let result = processInput(input);
     //@ts-ignore
     displayScreen.textContent = result;
+    resulted = true;
 });
