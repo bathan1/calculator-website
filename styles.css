@@ -51,6 +51,7 @@ body {
     min-height: 125px;
     flex-grow: 1;
     font-size: 2vw; 
+    word-wrap: break-word;
 }
 
 #userButtons {
